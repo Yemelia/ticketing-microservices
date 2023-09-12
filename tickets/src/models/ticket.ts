@@ -3,34 +3,34 @@ import mongoose from 'mongoose';
 // Required to create new User
 interface TicketAttrs {
   title: string;
-  price: string;
+  price: number;
   userId: string;
 }
 
 // Desscribe props that User Document has
 interface TicketDoc extends mongoose.Document {
   title: string;
-  price: string;
+  price: number;
   userId: string;
 }
 
 // Describe props that User Model has
-interface TicketModel extends mongoose.Model<any> {
+interface TicketModel extends mongoose.Model<TicketDoc> {
   build(attrs: TicketAttrs): TicketDoc;
 }
 
 const ticketSchema = new mongoose.Schema({
   title: {
     type: String,
-    require: true,
+    required: true,
   },
   price: {
     type: Number,
-    require: true,
+    required: true,
   },
   userId: {
     type: String,
-    require: true,
+    required: true,
   }
 }, {
   toJSON: {
