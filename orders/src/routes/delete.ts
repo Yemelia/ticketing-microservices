@@ -1,7 +1,7 @@
 import { NotAuthorizedError, NotFoundError, OrderStatus, requireAuth } from '@yemeliaorg/common';
 import express, { Request, Response } from 'express';
 import { Order } from '../models/order';
-import { OrderCancelledPublisher } from '../events/order-cancelled-puiblisher';
+import { OrderCancelledPublisher } from '../events/publishers/order-cancelled-puiblisher';
 import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
@@ -24,6 +24,7 @@ router.delete('/api/orders/:orderId', requireAuth, async (req: Request, res: Res
   // publish an event
   new OrderCancelledPublisher(natsWrapper.client).publish({
     id: order.id,
+    version: order.version,
     ticket: {
       id: order.ticket.id,
     }
