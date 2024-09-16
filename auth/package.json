@@ -18,7 +18,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@yemeliaorg/common": "^1.0.12",
+    "@yemeliaorg/common": "^1.0.17",
     "@types/cookie-session": "^2.0.45",
     "@types/express": "^4.17.18",
     "@types/jsonwebtoken": "^9.0.3",

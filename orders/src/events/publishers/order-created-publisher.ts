@@ -1,5 +1,5 @@
-import { Publisher, OrderCretedEvent, Subjects } from '@yemeliaorg/common';
+import { Publisher, OrderCreatedEvent, Subjects } from '@yemeliaorg/common';
 
-export class OrderCreatedPublisher extends Publisher<OrderCretedEvent> {
+export class OrderCreatedPublisher extends Publisher<OrderCreatedEvent> {
   readonly subject = Subjects.OrderCreated;
 }

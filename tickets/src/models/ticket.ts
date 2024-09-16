@@ -14,6 +14,7 @@ interface TicketDoc extends mongoose.Document {
   price: number;
   userId: string;
   version: number;
+  orderId?: string;
 }
 
 // Describe props that User Model has
@@ -33,7 +34,11 @@ const ticketSchema = new mongoose.Schema({
   userId: {
     type: String,
     required: true,
-  }
+  },
+  orderId: {
+    type: String,
+    required: false,
+  },
 }, {
   toJSON: {
     transform: (doc, ret) => {

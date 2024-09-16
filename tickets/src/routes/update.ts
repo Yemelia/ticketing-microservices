@@ -1,6 +1,6 @@
 import express, { Request, Response } from 'express';
 import { body } from 'express-validator';
-import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError } from '@yemeliaorg/common';
+import { validateRequest, NotFoundError, requireAuth, NotAuthorizedError, BadRequestError } from '@yemeliaorg/common';
 import { Ticket } from '../models/ticket';
 import { TicketUpdatedPublisher } from '../events/publishers/ticket-updated-publisher';
 import { natsWrapper } from '../nats-wrapper';
@@ -24,6 +24,10 @@ router.put('/api/tickets/:id',
 
     if (!ticket) {
       throw new NotFoundError();
+    }
+
+    if (ticket.orderId) {
+      throw new BadRequestError('Cannot edit reserved ticket');
     }
 
     if (req.currentUser!.id !== ticket.userId) {
