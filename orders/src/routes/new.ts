@@ -9,7 +9,7 @@ import { OrderCreatedPublisher } from '../events/publishers/order-created-publis
 
 const router = express.Router();
 
-const EXPIRATION_WINNDOW_SECONDS = 15 * 60;
+const EXPIRATION_WINDOW_SECONDS = 0.1 * 60;
 
 router.post(
   '/api/orders',
@@ -40,7 +40,7 @@ router.post(
 
     // Calculate an expiration date of thje order
     const expiration = new Date();
-    expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINNDOW_SECONDS)
+    expiration.setSeconds(expiration.getSeconds() + EXPIRATION_WINDOW_SECONDS)
 
     // Build the order and save it to the database
     const order = Order.build({
